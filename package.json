@@ -1,0 +1,45 @@
+{
+  "name": "promise-plus",
+  "version": "0.0.1",
+  "description": "select the best promise available at certain moment or leave the choice to the end user",
+  "main": "promise-plus.js",
+  "browser": "any-promise-shim.js",
+  "scripts": {
+    "test": "mocha --reporter spec --bail --check-leaks test/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/emilioplatzer/promise-plus"
+  },
+  "keywords": [
+    "promise",
+    "es6"
+  ],
+  "author": "Codenautas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/emilioplatzer/promise-plus/issues"
+  },
+  "homepage": "http://github.com/emilioplatzer/promise-plus",
+  "dependencies": {
+    "best-promise": "0.2.4"
+  },
+  "devDependencies": {
+    "es6-promise": "~3.0.2",
+    "rsvp": "~3.1.0",
+    "bluebird": "~2.10.0",
+    "when": "~3.7.3",
+    "q": "~1.4.1",
+    "native-promise-only": "~0.8.1",
+    "promises-aplus-tests": "~2.1.1",
+    "mocha": "~2.3.2",
+    "expect.js": "^0.3.1"
+  },
+  "qa-control": {
+    "package-version": "0.0.1",
+    "coverage": 90,
+    "run-in": "client",
+    "stability": "designing",
+    "type": "lib"
+  }
+}
