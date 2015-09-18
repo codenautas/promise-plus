@@ -5,19 +5,27 @@ var expect = require('expect.js');
 
 function Person(name){
     this.name=name;
+    this.getParent = function(){
+        return Promises.plus(Person, Promises.sleep(50).then(function(){ 
+            if(!this.parent){
+                throw new Error('He is Adan or root');
+            }
+            return this.parent;
+        }));
+    }
 }
 
 Person.prototype.haveChild = function(name){
     var self = this;
-    return Person.create(name).then(function(child){
+    return Promises.plus(Person, Person.create(name).then(function(child){
         child.parent = self;
         self.childs = (self.childs || []).push(child);
-    });
+    }));
 }
 Person.prototype.haveChild.returns = Person;
 
 Person.create = function create(name){
-    return Promises.plus(Person.create, Promises.sleep(50).then(function(){ return new Person(name);}));
+    return Promises.plus(Person, Promises.sleep(50).then(function(){ return new Person(name);}));
 }
 Person.create.returns = Person;
 

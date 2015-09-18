@@ -2,19 +2,19 @@
 
 var Promises = require('best-promise');
 
-Promises.plus = function plus(fun, promise){
-    if(!fun){
+Promises.plus = function plus(returningClass, promise){
+    if(!returningClass){
         return promise;
     }
     var promisePlusObject={__isPromisePlus:true};
-    var proto=fun.returns.prototype;
+    var proto=returningClass.prototype;
     Object.keys(proto).forEach(function(name){
         if(proto[name] && proto[name] instanceof Function){
             promisePlusObject[name]=function(){
                 var args=arguments;
-                return Promises.plus(proto[name], promise.then(function(returnedObject){
+                return promise.then(function(returnedObject){
                     return returnedObject[name].apply(returnedObject, args);
-                }));
+                });
             }
         }
     });
