@@ -7,20 +7,31 @@ Promises.plus = function plus(returningClass, promise){
         return promise;
     }
     var promisePlusObject={__isPromisePlus:true};
-    var proto=returningClass.prototype;
-    Object.keys(proto).forEach(function(name){
-        if(proto[name] && proto[name] instanceof Function){
-            promisePlusObject[name]=function(){
-                var args=arguments;
-                return promise.then(function(returnedObject){
-                    return returnedObject[name].apply(returnedObject, args);
-                });
+    var protos=[returningClass.prototype, returningClass.exposes];
+    protos.forEach(function(proto){
+        Object.keys(proto).forEach(function(name){
+            if(proto[name] && (proto[name] instanceof Function || proto[name].returns)){
+                console.log('encadene',name);
+                promisePlusObject[name]=function(){
+                    var args=arguments;
+                    console.log('encadenando ',name,args);
+                    //return Promises.plus(
+                    //    proto[name].returns,
+                    return    promise.then(function(returnedObject){
+                        console.log('via encadenamiento',name,args,returnedObject);
+                            return returnedObject[name].apply(returnedObject, args); 
+                        })
+                    //);
+                }
+            }else{
+                console.log('no pude encadenar',name);
             }
-        }
+        });
     });
     function add(name){
         if(promise[name] && promise[name] instanceof Function){
             promisePlusObject[name]=function(){
+                console.log('directa',name,arguments);
                 return promise[name].apply(promise, arguments);
             }
         }
