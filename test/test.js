@@ -29,6 +29,12 @@ Person.prototype.haveChild = function(name){
 
 Person.prototype.haveChild.returns = Person;
 
+Person.prototype.otherMember = null;
+
+Person.prototype.getName = function(){
+    return this.name;
+};
+
 Person.create = function create(name){
     return Promises.plus(Person, Promises.sleep(50).then(function(){ return new Person(name);}));
 }
@@ -65,6 +71,22 @@ describe('Promises', function(){
             var susan=tom.parent;
             expect(susan.childs[0].name).to.be('Tom');
         });
+    });
+    it('abreviated use multiple chain',function(done){
+        var saveSusan;
+        Person.create('Susan').haveChild('Tom').getParent().haveChild('Bety').getParent().then(function(susan){
+            expect(susan.childs.length).to.be(2);
+            saveSusan=susan;
+            return susan.haveChild('Smechy').getName();
+        }).then(function(name){
+            expect(name).to.be('Smechy');
+            return saveSusan.getParent();
+        }).then(function(noFather){
+            console.log('noFather',noFather);
+            throw new Error('fail to detect noFather');
+        },function(errOk){
+            expect(errOk.message).to.match(/Adan/);
+        }).then(done,done);
     });
     it('abreviated use multiple chain',function(done){
         Person.create('Susan').haveChild('Tom').getParent().haveChild('Bety').getParent().then(function(susan){
