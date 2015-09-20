@@ -4,13 +4,14 @@ var Promises = require('../');
 var expect = require('expect.js');
 
 function Person(name){
+    var self = this;
     this.name=name;
     this.getParent = function(){
         return Promises.plus(Person, Promises.sleep(50).then(function(){ 
-            if(!this.parent){
+            if(!self.parent){
                 throw new Error('He is Adan or root');
             }
-            return this.parent;
+            return self.parent;
         }));
     }
 }
@@ -39,9 +40,6 @@ describe('Promises', function(){
     it('unabreviated use',function(done){
         Person.create('Susan').then(function(susan){
             expect(susan.name).to.be('Susan');
-            //console.log('0a',susan.haveChild);
-            //console.log('0b',susan.haveChild('Peggy'));
-            //console.log('0',susan.haveChild('Tomy').then);
             return susan.haveChild('Tom').then(function(tom){
                 expect(tom.name).to.be('Tom');
                 expect(tom.parent.name).to.be('Susan');
@@ -50,10 +48,7 @@ describe('Promises', function(){
         }).then(done,done);
     });
     it('abreviated use',function(done){
-        console.log('1',Person.create('Susan 1'));
-        console.log('2',Person.create('Susan 2').haveChild('Tom 2'));
         Person.create('Susan').haveChild('Tom').then(function(tom){
-            console.log('tom',tom);
             expect(tom.name).to.be('Tom');
             expect(tom.parent.name).to.be('Susan');
             var susan=tom.parent;
@@ -74,7 +69,7 @@ describe('Promises', function(){
     it('abreviated use multiple chain',function(done){
         Person.create('Susan').haveChild('Tom').getParent().haveChild('Bety').getParent().then(function(susan){
             expect(susan.childs.length).to.be(2);
-            return susan.getParent;
+            return susan.getParent();
         }).then(function(noFather){
             console.log('noFather',noFather);
             throw new Error('fail to detect noFather');
