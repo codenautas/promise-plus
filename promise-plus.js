@@ -15,13 +15,13 @@ Promises.plus = function plus(returningClass, promise){
                 promisePlusObject[name]=function(){
                     var args=arguments;
                     console.log('encadenando ',name,args);
-                    //return Promises.plus(
-                    //    proto[name].returns,
-                    return    promise.then(function(returnedObject){
+                    return Promises.plus(
+                        proto[name].returns,
+                        promise.then(function(returnedObject){
                         console.log('via encadenamiento',name,args,returnedObject);
                             return returnedObject[name].apply(returnedObject, args); 
                         })
-                    //);
+                    );
                 }
             }else{
                 console.log('no pude encadenar',name);
