@@ -1,9 +1,8 @@
 {
   "name": "promise-plus",
-  "version": "0.0.2",
-  "description": "select the best promise available at certain moment or leave the choice to the end user",
+  "version": "0.0.3",
+  "description": "promises with sintact sugar for minimizing the use of `then`",
   "main": "promise-plus.js",
-  "browser": "any-promise-shim.js",
   "scripts": {
     "test": "mocha --reporter spec --bail --check-leaks test/",
     "test-ci": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/",
@@ -11,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/emilioplatzer/promise-plus"
+    "url": "https://github.com/codenautas/promise-plus"
   },
   "keywords": [
     "promise",
@@ -20,27 +19,32 @@
   "author": "Codenautas",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/emilioplatzer/promise-plus/issues"
+    "url": "https://github.com/codenautas/promise-plus/issues"
   },
-  "homepage": "http://github.com/emilioplatzer/promise-plus",
+  "homepage": "http://github.com/codenautas/promise-plus",
   "dependencies": {
     "best-promise": "0.2.4"
   },
   "devDependencies": {
-    "es6-promise": "~3.0.2",
-    "rsvp": "~3.1.0",
     "bluebird": "~2.10.0",
-    "when": "~3.7.3",
-    "q": "~1.4.1",
+    "es6-promise": "~3.0.2",
+    "expect.js": "^0.3.1",
+    "mocha": "~2.3.2",
     "native-promise-only": "~0.8.1",
     "promises-aplus-tests": "~2.1.1",
-    "mocha": "~2.3.2",
-    "expect.js": "^0.3.1"
+    "q": "~1.4.1",
+    "rsvp": "~3.1.0",
+    "when": "~3.7.3"
+  },
+  "jshintConfig": {
+    "asi": false,
+    "forin": true,
+    "curly": true
   },
   "qa-control": {
     "package-version": "0.0.1",
-    "coverage": 90,
-    "run-in": "client",
+    "coverage": 100,
+    "run-in": "server",
     "stability": "designing",
     "type": "lib"
   }

@@ -1,8 +1,13 @@
 "use strict";
+/*jshint eqnull:true */
+/*jshint globalstrict:true */
+/*jshint node:true */
 
-var Promises = require('best-promise');
+var PromisePlus = {};
 
-Promises.plus = function plus(returningClass, promise){
+var PromisePlus = require('best-promise');
+
+PromisePlus.plus = function plus(returningClass, promise){
     if(!returningClass){
         return promise;
     }
@@ -13,13 +18,13 @@ Promises.plus = function plus(returningClass, promise){
             if(proto[name] && (proto[name] instanceof Function || proto[name].returns)){
                 promisePlusObject[name]=function(){
                     var args=arguments;
-                    return Promises.plus(
+                    return PromisePlus.plus(
                         proto[name].returns,
                         promise.then(function(returnedObject){
                             return returnedObject[name].apply(returnedObject, args); 
                         })
                     );
-                }
+                };
             }
         });
     });
@@ -27,13 +32,15 @@ Promises.plus = function plus(returningClass, promise){
         if(promise[name] && promise[name] instanceof Function){
             promisePlusObject[name]=function(){
                 return promise[name].apply(promise, arguments);
-            }
+            };
         }
     }
     for(var name in promise){
+    /*jshint forin:false */
         add(name);
     }
     return promisePlusObject;
-}
+    /*jshint forin:true */
+};
 
-module.exports = Promises;
+module.exports = PromisePlus;
