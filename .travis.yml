@@ -8,5 +8,9 @@ matrix:
 script: "npm run-script test-ci"
 after_script: "npm install coveralls@2.10.0 && cat ./coverage/lcov.info | coveralls"
 env:
+  - PROMISE_IMPL=es6-promise
   - PROMISE_IMPL=promise
   - PROMISE_IMPL=native-promise-only
+  - PROMISE_IMPL=bluebird
+  - PROMISE_IMPL=rsvp
+  - PROMISE_IMPL=when

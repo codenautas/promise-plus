@@ -1,6 +1,6 @@
 {
   "name": "promise-plus",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "promises with sintact sugar for minimizing the use of `then`",
   "main": "promise-plus.js",
   "scripts": {

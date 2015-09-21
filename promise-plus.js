@@ -39,6 +39,8 @@ PromisePlus.plus = function plus(returningClass, promise){
     /*jshint forin:false */
         add(name);
     }
+    add('then');
+    add('catch');
     return promisePlusObject;
     /*jshint forin:true */
 };
