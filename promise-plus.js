@@ -14,6 +14,12 @@ PromisePlus.plus = function plus(returningClass, promise){
     var promisePlusObject={__isPromisePlus:true};
     var protos=[returningClass.prototype, returningClass.exposes || {}];
     protos.forEach(function(proto){
+        try{
+            Object.keys(proto);
+        }catch(err){
+            console.log('********************'); 
+            console.log(err,protos,proto);
+        }
         Object.keys(proto).forEach(function(name){
             if(proto[name] && (proto[name] instanceof Function || proto[name].returns)){
                 promisePlusObject[name]=function(){
