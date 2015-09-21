@@ -26,15 +26,16 @@
     "best-promise": "0.2.4"
   },
   "devDependencies": {
-    "bluebird": "~2.10.0",
-    "es6-promise": "~3.0.2",
-    "expect.js": "^0.3.1",
-    "mocha": "~2.3.2",
-    "native-promise-only": "~0.8.1",
-    "promises-aplus-tests": "~2.1.1",
-    "q": "~1.4.1",
-    "rsvp": "~3.1.0",
-    "when": "~3.7.3"
+    "bluebird": "2.10.0",
+    "es6-promise": "3.0.2",
+    "expect.js": "0.3.1",
+    "istanbul": "0.3.20",
+    "mocha": "2.3.2", 
+    "native-promise-only": "0.8.1",
+    "promises-aplus-tests": "2.1.1",
+    "q": "1.4.1",
+    "rsvp": "3.1.0",
+    "when": "3.7.3"
   },
   "jshintConfig": {
     "asi": false,
