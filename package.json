@@ -1,10 +1,10 @@
 {
   "name": "promise-plus",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "promises with sintact sugar for minimizing the use of `then`",
   "main": "promise-plus.js",
   "scripts": {
-    "test": "mocha --reporter spec --bail --check-leaks test/",
+    "test": "set PROMISE_RANDOM=1&& mocha --reporter spec --bail --check-leaks test/",
     "test-ci": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/",
     "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter dot --check-leaks test/"
   },

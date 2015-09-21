@@ -12,7 +12,7 @@ PromisePlus.plus = function plus(returningClass, promise){
         return promise;
     }
     var promisePlusObject={__isPromisePlus:true};
-    var protos=[returningClass.prototype, returningClass.exposes];
+    var protos=[returningClass.prototype, returningClass.exposes || {}];
     protos.forEach(function(proto){
         Object.keys(proto).forEach(function(name){
             if(proto[name] && (proto[name] instanceof Function || proto[name].returns)){

@@ -14,6 +14,9 @@ function Person(name){
             return self.parent;
         }));
     }
+    this.getParentName = function(){
+        return this.parent.name;
+    }
 }
 Person.exposes={};
 
@@ -40,6 +43,7 @@ Person.create = function create(name){
 }
 Person.create.returns = Person;
 Person.exposes.getParent = {returns: Person};
+Person.exposes.getParentName = {returns: String};
 
 
 describe('Promises', function(){
@@ -80,18 +84,10 @@ describe('Promises', function(){
             return susan.haveChild('Smechy').getName();
         }).then(function(name){
             expect(name).to.be('Smechy');
+            return saveSusan.haveChild('Pedro').getParentName();
+        }).then(function(name){
+            expect(name).to.be('Susan');
             return saveSusan.getParent();
-        }).then(function(noFather){
-            console.log('noFather',noFather);
-            throw new Error('fail to detect noFather');
-        },function(errOk){
-            expect(errOk.message).to.match(/Adan/);
-        }).then(done,done);
-    });
-    it('abreviated use multiple chain',function(done){
-        Person.create('Susan').haveChild('Tom').getParent().haveChild('Bety').getParent().then(function(susan){
-            expect(susan.childs.length).to.be(2);
-            return susan.getParent();
         }).then(function(noFather){
             console.log('noFather',noFather);
             throw new Error('fail to detect noFather');
